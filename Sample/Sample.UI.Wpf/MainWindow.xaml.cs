@@ -7,15 +7,9 @@ namespace Sample.UI.Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainViewModel viewModel)
         {
             this.InitializeComponent();
-
-            var viewModel = new MainViewModel(
-                new ImageLogic(
-                    new FileSystemImageManager("Images")),
-                new WpfDialogService());
-
             this.DataContext = viewModel;
 
             this.Loaded += (s, e) =>
