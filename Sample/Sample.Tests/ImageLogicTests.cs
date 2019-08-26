@@ -40,5 +40,14 @@ namespace Sample.Tests
 
             Assert.AreEqual(count, images.Count());
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void SearchImages_SearchTextNull_ThrowsArgumentNullException()
+        {
+            var logic = new ImageLogic(new DummyImageManager(2));
+
+            logic.SearchImages(null);
+        }
     }
 }
