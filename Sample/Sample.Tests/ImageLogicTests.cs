@@ -42,6 +42,7 @@ namespace Sample.Tests
         }
 
         [TestMethod]
+        [TestCategory("Exceptions")]
         [ExpectedException(typeof(ArgumentNullException))]
         public void SearchImages_SearchTextNull_ThrowsArgumentNullException()
         {
@@ -51,6 +52,7 @@ namespace Sample.Tests
         }
 
         [TestMethod]
+        [TestCategory("Exceptions")]
         public void SearchImages_SearchTextNull_ThrowsArgumentNullException2()
         {
             int count = 2;
