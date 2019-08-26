@@ -60,5 +60,20 @@ namespace Sample.Tests
 
             Assert.ThrowsException<ArgumentNullException>(() => logic.SearchImages(null));
         }
+
+        [DataTestMethod]
+        [DataRow("", 20)]
+        [DataRow("xyz", 0)]
+        [DataRow("image", 20)]
+        [DataRow("image1", 11)]
+        public void SearchImages_ValidSearchText_ReturnsCorrectResult(string searchText, int expectedResults)
+        {
+            int count = 20;
+            var logic = new ImageLogic(new DummyImageManager(count));
+
+            var images = logic.SearchImages(searchText);
+
+            Assert.AreEqual(expectedResults, images.Count());
+        }
     }
 }
