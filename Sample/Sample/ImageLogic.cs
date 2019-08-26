@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Sample
 {
-    public class ImageLogic
+    public class ImageLogic : IImageLogic
     {
         private readonly IImageManager imageManager;
 

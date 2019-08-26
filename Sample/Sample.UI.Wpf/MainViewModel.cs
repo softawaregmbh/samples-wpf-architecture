@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
@@ -9,14 +10,17 @@ namespace Sample.UI.Wpf
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private readonly ImageLogic imageLogic;
+        private readonly IImageLogic imageLogic;
+        private readonly IDialogService dialogService;
 
         private string searchText = string.Empty;
         private Image selectedImage;
 
-        public MainViewModel()
+        public MainViewModel(IImageLogic imageLogic, IDialogService dialogService)
         {
-            this.imageLogic = new ImageLogic(new FileSystemImageManager("Images"));
+            this.imageLogic = imageLogic ?? throw new ArgumentNullException(nameof(imageLogic));
+            this.dialogService = dialogService ?? throw new ArgumentNullException(nameof(dialogService));
+
             this.Images= new ObservableCollection<Image>();
 
             this.SearchCommand = new DelegateCommand(this.SearchImages);
@@ -64,7 +68,7 @@ namespace Sample.UI.Wpf
 
         private void DeleteImage()
         {
-            if (MessageBox.Show($"Are you sure you want do delete {this.SelectedImage.Name}?", "Delete image", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            if (this.dialogService.Confirm($"Are you sure you want do delete {this.SelectedImage.Name}?", "Delete image"))
             {
                 this.imageLogic.DeleteImage(this.SelectedImage);
                 this.Images.Remove(this.SelectedImage);
