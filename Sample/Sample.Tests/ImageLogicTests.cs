@@ -49,5 +49,14 @@ namespace Sample.Tests
 
             logic.SearchImages(null);
         }
+
+        [TestMethod]
+        public void SearchImages_SearchTextNull_ThrowsArgumentNullException2()
+        {
+            int count = 2;
+            var logic = new ImageLogic(new DummyImageManager(count));
+
+            Assert.ThrowsException<ArgumentNullException>(() => logic.SearchImages(null));
+        }
     }
 }
