@@ -16,7 +16,7 @@ namespace Sample.UI.Wpf
 
         public MainViewModel()
         {
-            this.imageLogic = new ImageLogic();
+            this.imageLogic = new ImageLogic(new FileSystemImageManager("Images"));
             this.Images= new ObservableCollection<Image>();
 
             this.SearchCommand = new DelegateCommand(this.SearchImages);

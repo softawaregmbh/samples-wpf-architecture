@@ -6,11 +6,11 @@ namespace Sample
 {
     public class ImageLogic
     {
-        private FileSystemImageManager imageManager;
+        private readonly IImageManager imageManager;
 
-        public ImageLogic()
+        public ImageLogic(IImageManager imageManager)
         {
-            this.imageManager = new FileSystemImageManager("Images");
+            this.imageManager = imageManager ?? throw new ArgumentNullException(nameof(imageManager));
         }
 
         public IEnumerable<Image> SearchImages(string searchText)

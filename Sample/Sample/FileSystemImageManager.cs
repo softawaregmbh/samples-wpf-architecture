@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Sample
 {
-    public class FileSystemImageManager
+    public class FileSystemImageManager : IImageManager
     {
         private readonly string path;
 
